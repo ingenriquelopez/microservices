@@ -14,6 +14,22 @@
         films           : [ { type: String, ref: 'Film'} ]
       });
 
+  planetSchema.statics.list = async function() {
+    return await this.find()
+    .populate('res_idents',['_id','name'])
+    .populate('films',['_id','title']);
+  };
+  planetSchema.statics.get = async function(_id) {
+      return await this.findById(_id)
+          .populate('res_idents',['_id','name'])
+          .populate('films',['_id','title']);
+  }
+  
+  planetSchema.statics.insert = async function(planet) {
+      return await this.create(planet);
+  }
+  
+
 
 module.exports = planetSchema;
       
