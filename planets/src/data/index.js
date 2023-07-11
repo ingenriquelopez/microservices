@@ -1,10 +1,12 @@
+const axios = require('axios');
 const planets = require('./planets.json');
 
 module.exports = {
-    list: async ()=> {
-        return planets;
+    list: async()=> {
+        const results = await axios.get('http://database:8004/Planet');
+        return results.data;
     },
     create: async()=> {
-        throw  Error("Hay un error al momento de crear el PLANETA");
+        throw  Error("Hay un error en la BDD al  momento de crear el Planet");
     },
 }
